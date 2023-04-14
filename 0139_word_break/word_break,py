@@ -1,0 +1,19 @@
+def word_break(s, words, memory):
+    if s in words:
+        memory[s] = True
+        return True
+    
+    if s in memory:
+        return memory[s]
+
+    for i in range(len(s)):
+        if s[:i] in words and word_break(s[i:], words, memory):
+            memory[s] = True
+            return True
+    
+    memory[s] = False
+    return False
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        return word_break(s, wordDict, {})
